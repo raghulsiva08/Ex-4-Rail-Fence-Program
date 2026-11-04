@@ -19,7 +19,49 @@ STEP-4: Arrange the characters of the keyword in sorted order and the correspond
 STEP-5: Read the characters row wise or column wise in the former order to get the cipher text.
 
 # PROGRAM
+~~~
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int rails, len, i, j, dir;
+    char str[1000];
+    printf("Enter a Secret Message: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';
+    len = strlen(str);
+    printf("Enter number of rails: ");
+    scanf("%d", &rails);
+    char rail[rails][len];
+    for(i = 0; i < rails; i++)
+        for(j = 0; j < len; j++)
+            rail[i][j] = '\n';
+    dir = 1;  
+    int row = 0;
+    for(i = 0; i < len; i++) {
+        rail[row][i] = str[i];
+        if(row == 0)
+            dir = 1;
+        else if(row == rails - 1)
+            dir = -1;
+        row += dir;
+    }
+    printf("\nEncrypted Message: ");
+    for(i = 0; i < rails; i++)
+        for(j = 0; j < len; j++)
+            if(rail[i][j] != '\n')
+                printf("%c", rail[i][j]);
+                
+    printf("\n");
+
+    return 0;
+}
+~~~
 
 # OUTPUT
+<img width="406" height="197" alt="image" src="https://github.com/user-attachments/assets/f2c6b2c7-c076-4481-ab6e-8f4e3c01f821" />
+
 
 # RESULT
+
+Thus the program for performing rail fence cipher is executed.
